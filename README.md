@@ -23,7 +23,7 @@ heidi.lischer@ieu.uzh.ch
 9.30 - 9.40 | **Welcome & Introduction** | SW&HTL
 9.40 - 12.30 | **Variant Calling 2** <br /> [Presentation](VARIANT_CALLING/Variant_Calling2.pdf)  \| [Hands-on](VARIANT_CALLING/Exercises_Variant_Calling.md) | SW
  | |
-13.30 - 14.30 | *Talk:* Dr. Christine Grossen (UZH): RAD-seq [pdf]() |
+13.30 - 14.30 | *Talk:* Dr. Christine Grossen (UZH): RAD-seq [pdf](TALKS/) |
 14.45 - 17.00 | **RNA-seq** <br /> [Presentation](RNAseq/RNAseq.pdf) \| [Hands-on](RNAseq/Exercises_RNAseq.pdf) | HTL
 17.00 - 17.30 | **Making sense of gene lists** <br /> [Presentation](GENE_LISTS/MakingSenseOfGeneLists.pdf)  \| [Hands-on](GENE_LISTS/Exercises_MakingSenseOfGeneLists.md) | SW
 
@@ -33,11 +33,11 @@ heidi.lischer@ieu.uzh.ch
 &nbsp;   | &nbsp; | &nbsp;
 -------- | --- | --- 
 9.30 - 12.30 | **Phylogenomics** | 
-             | Phylogenomic algorithms, construction, Heterozygote sampling <br /> [Presentation]() \| [Hands-on]() | HTL
-             | Tree manipulation, summarizing and potential pitfalls <br /> [Presentation]() | SW
+             | Phylogenomic algorithms, construction, Heterozygote sampling <br /> [Presentation](PHYLOGENOMICS/Phylogenomics_HTL.pdf) \| [Hands-on](PHYLOGENOMICS/Exercises_Phylogenomics.pdf) | HTL
+             | Tree manipulation, summarizing and potential pitfalls <br /> [Presentation](PHYLOGENOMICS/Phylogenomics_HTL.pdf) | SW
  | |
-13.30 - 14.30 | *Talk:* Dr. Jean-Claude Walser (ETH): RNA-seq in ecology and evolutionary biology [pdf]() | 
-14.45 - 16.00 |	*Talk:* Dr. Martin Fischer (ETH): Detection of signatures of selection [pdf]() | 
+13.30 - 14.30 | *Talk:* Dr. Jean-Claude Walser (ETH): RNA-seq in ecology and evolutionary biology [pdf](TALKS/) | 
+14.45 - 16.00 |	*Talk:* Dr. Martin Fischer (ETH): Detection of signatures of selection [pdf](TALKS/) | 
 16.00 - 17.30 | Exercises | SW&HTL 
 
 
