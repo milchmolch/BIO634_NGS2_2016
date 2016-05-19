@@ -34,7 +34,7 @@ heidi.lischer@ieu.uzh.ch
 -------- | --- | --- 
 9.30 - 12.30 | **Phylogenomics** | 
              | Phylogenomic algorithms, construction, Heterozygote sampling <br /> [Presentation](PHYLOGENOMICS/Phylogenomics_HTL.pdf) \| [Hands-on](PHYLOGENOMICS/Exercises_Phylogenomics.pdf) | HTL
-             | Tree manipulation, summarizing and potential pitfalls <br /> [Presentation](PHYLOGENOMICS/Phylogenomics_HTL.pdf) | SW
+             | Tree manipulation, summarizing and potential pitfalls <br /> [Presentation](PHYLOGENOMICS/Phylogenomics_SW.pdf) | SW
  | |
 13.30 - 14.30 | *Talk:* Dr. Jean-Claude Walser (ETH): RNA-seq in ecology and evolutionary biology [pdf](TALKS/) | 
 14.45 - 16.00 |	*Talk:* Dr. Martin Fischer (ETH): Detection of signatures of selection [pdf](TALKS/) | 
