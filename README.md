@@ -1,4 +1,4 @@
-## BIO634 Next-Generation Sequencing 2 – Advanced Course: Transcriptomes, Variant Calling and Biological Interpretation
+## BIO634 Next-Generation Sequencing 2 – Transcriptomes, Variant Calling and Biological Interpretation
 
 ## May 23/24 2016
 
