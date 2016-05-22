@@ -20,58 +20,6 @@ wget https://www.dropbox.com/s/9p8zcg1add22q0u/DATA_NGS2_SNP.zip?dl=0
 ```
 
 
-### Install software
-
-This exercise works only with samtools version > 1.0. The version installed by the package manager is 0.1.19 which is quite a bit different from version 1.2. 
-
-#### Install latest samtools and bcftools
-
-Go to the `~/software` folder and build & install htslib:
-
-```
-git clone https://github.com/samtools/htslib
-cd htslib
-make
-```
-
-Go to the ~/software directory and build & install samtools:
-```
-git clone https://github.com/samtools/samtools
-cd samtools
-make
-```
-
-Now if you do `./samtools` you should see a version > 1.2
-
-
-```
-git clone https://github.com/samtools/bcftools
-cd bcftools
-make
-```
-
-Alternatively, the binaries can be downloaded from here (untested):
-```
-https://github.com/samtools/htslib/releases/download/1.2.1/htslib-1.2.1.tar.bz2
-https://github.com/samtools/samtools/releases/download/1.2/samtools-1.2.tar.bz2
-https://github.com/samtools/bcftools/releases/download/1.2/bcftools-1.2.tar.bz2
-```
-
-#### Install vt
-
-Go to the `~/software` folder and build & install vt:
-
-```
-git clone https://github.com/atks/vt
-cd vt
-make
-```
-
-Export the path to vt like this:
-```
-export PATH=~/software/vt:$PATH
-```
-
 ## SNP Calling using FreeBayes
 
 Here we use FreeBayes, which is a fast easy-to-run variant caller for short variants (Garrison & Marth, http://arxiv.org/abs/1207.3907). It identifies small polymorphisms, specifically SNPs (single-nucleotide polymorphisms), small indels (insertions and deletions), MNPs (multi-nucleotide polymorphisms), and complex events (composite insertion and substitution events) smaller than the length of a short-read sequencing alignment. 
@@ -82,10 +30,10 @@ We will identify short variants relative to the genome of the ***E.coli* DB10 st
 
 FreeBayes expects a cleaned BAM file as input with marked duplicates. It calls variants for any number of individuals of a population, we can combine data from multiple individuals into a single BAM by attaching Read Group (RG) to the alignments.
 
-First let us set a variable with the path:
+First let us add the directory containing freebayes to the PATH:
 ```
-FREEBAYES=~/software/freebayes/bin/freebayes
-$FREEBAYES --help
+export PATH=$PATH:~/software/freebayes/bin
+freebayes --help
 ```
 
 The reads were already mapped to the *E.coli* DH10B genome, you will find a BAM file `MiSeq_Ecoli_DH10B_110721_PF_subsample.bam`. Let us rename the file to `Ecoli_DH10B.bam` to save typing. 
@@ -117,7 +65,7 @@ The index command creates an additional file allowing faster access. BAM index f
 
 Now we can run an analysis without any parameter optimization just setting the ploidy to 1:
 ```
-$FREEBAYES -p 1 -f EcoliDH10B.fa Ecoli_DH10B-mdup.bam > Ecoli_DH10B-mdup.vcf
+freebayes -p 1 -f EcoliDH10B.fa Ecoli_DH10B-mdup.bam > Ecoli_DH10B-mdup.vcf
 ```
 
 ### Indexing vcf files
@@ -156,7 +104,12 @@ As we have to do this for each vcf file, we write a script that does the job. Sa
 
 vt is a toolkit for variant annotation and manipulation. In addition to other methods, it provides a nice method, vt peek, to determine basic statistics about the variants in a VCF file.
 
-We can get a summary like so:
+Export the path to vt like this:
+```
+export PATH=$PATH:~/software/vt
+```
+
+Now we can get a summary like so:
 ```
 vt peek Ecoli_DH10B-mdup.vcf.gz
 ```
@@ -180,7 +133,8 @@ This typically leads to NGS pipelines that maximize sensitivity, leading to a **
 
 Like this we remove all low-quality variants:
 ```
-~/software/bcftools/bcftools filter -O z -o Ecoli_DH10B-mdup-filtered.vcf.gz -i'%QUAL>10' Ecoli_DH10B-mdup.vcf.gz
+BCFTOOLS13=~/software/SAMTOOLS/bcftools-1.3/bcftools
+$BCFTOOLS13 filter -O z -o Ecoli_DH10B-mdup-filtered.vcf.gz -i'%QUAL>10' Ecoli_DH10B-mdup.vcf.gz
 vt peek Ecoli_DH10B-mdup.vcf.gz
 ```
 All but 1 variant have been filtered out as low-quality.
@@ -188,9 +142,14 @@ All but 1 variant have been filtered out as low-quality.
 
 An alternative summary with more information using bcftools:
 ```
-~/software/bcftools/bcftools stats -F EcoliDH10B.fa -s - Ecoli_DH10B-mdup.vcf.gz > Ecoli_DH10B-mdup.vcf.gz.stats
-~/software/bcftools/plot-vcfstats -p bcftools_plots/ Ecoli_DH10B-mdup.vcf.gz.stats
+$BCFTOOLS stats -F EcoliDH10B.fa -s - Ecoli_DH10B-mdup.vcf.gz > Ecoli_DH10B-mdup.vcf.gz.stats
+~/software/SAMTOOLS/bcftools-1.3/plot-vcfstats -p bcftools_plots/ Ecoli_DH10B-mdup.vcf.gz.stats
 ```
+
+#### samtools/bcftools versions
+
+This exercise uses 2 different versions of samtools/bcftools (Unfortunately not all functions are available in both versions). In the beginning we used the version 0.1.19 installed by the package manager. In the last filtering exercise we used version 1.3 whose syntax is often slightly different from version 0.1.19. 
+
 
 
 ### Visualize the aligned reads
@@ -231,10 +190,6 @@ In constrast, for GATK UnifiedGenotyper we have to use all 4 BAM preprocessing s
 
 ### GATK
 
-```
-Important Note:
-If you plan to use the GATK for-profit, you will need to purchase a license. Check the GATK website for details.
-```
 
 - GATK is powerful, but it requires relatively complex pipelines 
 - GATK has been developed for human data and they provide files with known SNPs, indels etc. only for human. Some of the preprocessing steps can not be run for other organisms.
@@ -243,14 +198,38 @@ If you plan to use the GATK for-profit, you will need to purchase a license. Che
 - GATK is slow and resource-hungry. If you want to run it for pooled or population data, prepare to run in on a cluster.
 - GATK is under constant development. Check the website from time to time.
 
+#### Install GATK
+
+```
+Important Note:
+If you plan to use the GATK for-profit, you will need to purchase a license. Check the GATK website for details.
+```
+
+Download GATK from https://www.broadinstitute.org/gatk/download/  
+
+Then move the file to the ~/software/GATK directory and decompress it:
+
+```
+cd ~/software/GATK
+mv ~/Download/GenomeAnalysisTK-3.5.tar.bz2 .
+bunzip2 GenomeAnalysisTK-3.5.tar.bz2
+tar xf GenomeAnalysisTK-3.5.tar
+```
+
+and you're done with the GATK installation.
+
+
+
 
 The following script `Run_GATK_Ecoli.sh` runs a GATK pipeline for the *E.coli* BAM file. Change the variable BAMFILE if you have renamed the BAM file earlier.
 ```
 #!/bin/bash
+set -o nounset
+set -o errexit
 
  # BAM processing using PICARD, SNP calling using GATK
 
-SAMTOOLS=~/software/samtools/samtools
+SAMTOOLS=~/software/SAMTOOLS/samtools-1.3/samtools
 GATK=~/software/GATK/GenomeAnalysisTK.jar
 PICARD=~/software/picard-tools-1.130/picard.jar
 
@@ -271,7 +250,6 @@ java -jar $PICARD CreateSequenceDictionary R=$REF_FILE O=${REF_FILE%%.*}.dict
 
  # sort mappings by name to keep paired reads together
 java -Xmx1g -jar $PICARD SortSam \
-	# R=$REF_FILE
 	I=$BAM_FILE \
 	O=${BAM_FILE%%.*}_sorted.bam \
 	SO=queryname \
@@ -301,7 +279,7 @@ java -Xmx1g -jar $PICARD AddOrReplaceReadGroups \
 	I=${BAM_FILE%%.*}_rdup.bam \
 	O=${BAM_FILE%%.*}_rdup-rg.bam \
 	RGID="NA18507" \
-	#RGLB="lib-NA18507" \
+	RGLB="lib-NA18507" \
 	RGPL="ILLUMINA" \
 	RGPU="unkn-0.0" \
 	RGSM="MiSeq_Ecoli_DH10B" \
@@ -346,19 +324,20 @@ java -Xmx1g -jar $GATK -T UnifiedGenotyper \
 	-o raw_variants_UG.vcf
  
  #2. Run HaplotypeCaller
- # this takes approx. 1.7 min
 java -Xmx1g -jar $GATK -T HaplotypeCaller \
 	-R $REF_FILE \
 	-I ${BAM_FILE%%.bam}_realigned.bam \
+	--genotyping_mode DISCOVERY \
 	-ploidy 1 \
 	-stand_call_conf 30 \
 	-stand_emit_conf 10 \
 	-o raw_variants_HC.vcf
+	# -L 20
 ```
 
 - Try to understand all the steps.
 - We run both UnifiedGenotyper and HaplotypeCaller. What is the difference?
- 
+- A good page how to interpret vcf is [here](https://www.broadinstitute.org/gatk/guide/article?id=1268)  
  
 #### GATK with a human sample
 
@@ -542,7 +521,7 @@ Nice! We now have a familiar VCF file.
 #### SNP calling using freebayes with BAM preprocessing (fix mate pairs, mark duplicates)
 
 ```
-SAMTOOLS=~/software/samtools/samtools
+SAMTOOLS=~/software/SAMTOOLS/samtools-1.3
 PICARD=~/software/picard-tools-1.130/picard.jar
 FREEBAYES=~/software/freebayes/bin/freebayes
 
@@ -572,4 +551,55 @@ $SAMTOOLS index Ecoli_DH10B-fixmate-mdup.bam
 $FREEBAYES -f EcoliDH10B.fa -p 1 Ecoli_DH10B-fixmate-mdup.bam > Ecoli_DH10B-fixmate-mdup.vcf
 ```
 
- 
+
+### Install software
+
+This exercise works only with samtools version > 1.0. The version installed by the package manager is 0.1.19 which is quite a bit different from version 1.2. 
+
+#### Install latest samtools and bcftools
+
+Go to the `~/software` folder and build & install htslib:
+
+```
+git clone https://github.com/samtools/htslib
+cd htslib
+make
+```
+
+Go to the ~/software directory and build & install samtools:
+```
+git clone https://github.com/samtools/samtools
+cd samtools
+make
+```
+
+Now if you do `./samtools` you should see a version > 1.2
+
+
+```
+git clone https://github.com/samtools/bcftools
+cd bcftools
+make
+```
+
+Alternatively, the binaries can be downloaded from here (untested):
+```
+https://github.com/samtools/htslib/releases/download/1.2.1/htslib-1.2.1.tar.bz2
+https://github.com/samtools/samtools/releases/download/1.2/samtools-1.2.tar.bz2
+https://github.com/samtools/bcftools/releases/download/1.2/bcftools-1.2.tar.bz2
+```
+
+#### Install vt
+
+Go to the `~/software` folder and build & install vt:
+
+```
+git clone https://github.com/atks/vt
+cd vt
+make
+```
+
+Export the path to vt like this:
+```
+export PATH=~/software/vt:$PATH
+```
