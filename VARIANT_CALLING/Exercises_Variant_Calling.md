@@ -16,7 +16,7 @@ The approaches presented here work for Illumina or Ion Torrent data.
 ### Download data
 
 ```
-wget https://www.dropbox.com/s/9p8zcg1add22q0u/DATA_NGS2_SNP.zip?dl=0
+wget https://www.dropbox.com/s/9p8zcg1add22q0u/DATA_NGS2_SNP.zip
 ```
 
 
@@ -142,7 +142,8 @@ All but 1 variant have been filtered out as low-quality.
 
 An alternative summary with more information using bcftools:
 ```
-$BCFTOOLS stats -F EcoliDH10B.fa -s - Ecoli_DH10B-mdup.vcf.gz > Ecoli_DH10B-mdup.vcf.gz.stats
+~/software/SAMTOOLS/bcftools-1.3/bcftools stats -F EcoliDH10B.fa -s - Ecoli_DH10B-mdup.vcf.gz > Ecoli_DH10B-mdup.vcf.gz.stats
+sudo apt-get install python-matplotlib
 ~/software/SAMTOOLS/bcftools-1.3/plot-vcfstats -p bcftools_plots/ Ecoli_DH10B-mdup.vcf.gz.stats
 ```
 
@@ -346,15 +347,15 @@ Next we will work on the low coverage data set of the [1000 genomes project](htt
 
 We will download only a subset of the original data (to safe disk space and execution time), 1 MB of chromosome 20.
 
-- First create a new folder and download this human sample (The download may take some minutes - in the meanwhile, open a new tab of your terminal and proceed with the next steps):
-
+- First create a new folder and download this human sample (The download may take some minutes - in the meanwhile, open a new tab of your terminal and proceed with the next steps). Download the sequence of chromosome 20 and the bam file from Dropbox:
+```
+wget https://www.dropbox.com/s/rc7rdbm764mm89s/human_example.zip
+```
+ 
+The BAM file was prepared for you like this (you don't have to do it): 
   ```
   samtools view -h ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase1/data/HG00154/alignment/HG00154.mapped.ILLUMINA.bwa.GBR.low_coverage.20101123.bam 20:1000000-2000000 > HG00154.low_coverage.chr20.1000000-2000000.sam
 samtools view -bS HG00154.low_coverage.chr20.1000000-2000000.sam > HG00154.low_coverage.chr20.1000000-2000000.bam
-```
-- Download the sequence of chromosome 20 from Dropbox
-```
-wget https://www.dropbox.com/s/rc7rdbm764mm89s/human_example.zip?dl=0
 ```
     
 - Index the BAM file
