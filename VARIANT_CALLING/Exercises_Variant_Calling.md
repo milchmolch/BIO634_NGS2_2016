@@ -352,8 +352,10 @@ We will download only a subset of the original data (to safe disk space and exec
   samtools view -h ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase1/data/HG00154/alignment/HG00154.mapped.ILLUMINA.bwa.GBR.low_coverage.20101123.bam 20:1000000-2000000 > HG00154.low_coverage.chr20.1000000-2000000.sam
 samtools view -bS HG00154.low_coverage.chr20.1000000-2000000.sam > HG00154.low_coverage.chr20.1000000-2000000.bam
 ```
-- Download the sequence of chromosome 20 from []()
-  
+- Download the sequence of chromosome 20 from Dropbox
+```
+wget https://www.dropbox.com/s/rc7rdbm764mm89s/human_example.zip?dl=0
+```
     
 - Index the BAM file
 - Copy the script, adapt it (BAM_FILE, REF_FILE, ploidy) and run GATK on it
