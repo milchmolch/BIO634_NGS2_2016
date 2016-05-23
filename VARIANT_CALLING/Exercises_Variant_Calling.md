@@ -158,6 +158,7 @@ Seeing is believing! One should always have at look at the data to get a feeling
 
 Go to the Integrative Genome Viewer (IGV) website http://www.broadinstitute.org/igv/ 
 
+1. Open a new tab in the terminal (File | Open Tab)
 1. Go to IGV directory doing `cd ~/software/IGV_2.3.52/`￼￼￼￼
 2. Launch IGV doing `./igv.sh`
 3. Load the fasta file of the genome: File | Load Genome from File...  
@@ -346,27 +347,20 @@ Next we will work on the low coverage data set of the [1000 genomes project](htt
 We will download only a subset of the original data (to safe disk space and execution time), 1 MB of chromosome 20.
 
 - First create a new folder and download this human sample (The download may take some minutes - in the meanwhile, open a new tab of your terminal and proceed with the next steps):
-```
-samtools view -h ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00154/alignment/HG00154.mapped.ILLUMINA.bwa.GBR.low_coverage.20120522.bam 17:7512445-7513455 > HG00154.low_coverage.chr17.7512445-7513455.bam
 
-samtools view -Sb HG00154.low_coverage.chr17.7512445-7513455.sam > HG00154.low_coverage.chr17.7512445-7513455.bam
-
-
-
-samtools view -h ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase1/data/HG00154/alignment/HG00154.mapped.ILLUMINA.bwa.GBR.low_coverage.20101123.bam 20:1000000-2000000
+  ```
+  samtools view -h ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase1/data/HG00154/alignment/HG00154.mapped.ILLUMINA.bwa.GBR.low_coverage.20101123.bam 20:1000000-2000000 > HG00154.low_coverage.chr20.1000000-2000000.sam
+samtools view -bS HG00154.low_coverage.chr20.1000000-2000000.sam > HG00154.low_coverage.chr20.1000000-2000000.bam
 ```
-- Download the sequence of chromosome 20 and rename it: 
-```
-wget ftp://ftp.ncbi.nlm.nih.gov/genbank/genomes/Eukaryotes/vertebrates_mammals/Homo_sapiens/GRCh37/Primary_Assembly/assembled_chromosomes/FASTA/chr17.fa.gz
-zcat chr17.fa.gz | awk '{if ($1==">gi|224384752|gb|CM000679.1|") {print ">17"} else {print $0}}' > chr17.fa
-rm chr17.fa.gz
-```
+- Download the sequence of chromosome 20 from []()
+  
+    
 - Index the BAM file
 - Copy the script, adapt it (BAM_FILE, REF_FILE, ploidy) and run GATK on it
 - Compress & index the resulting vcf files
 - Filter out low-quality variants and have a look at the filtered file:
 ```
-~/software/bcftools/bcftools filter -O z -o VCF.vcf-filtered.gz -i'%QUAL>10' VCF.vcf.gz
+~/software/SAMTOOLS/bcftools-1.3/bcftools filter -O z -o VCF.vcf-filtered.gz -i'%QUAL>10' VCF.vcf.gz
 vt peek VCF.vcf-filtered.gz
 ``` 
 - Check some variants in IGV
@@ -467,6 +461,8 @@ SRR030252.fastq.gz | Illumina reads, 0K generation individual clone from populat
 SRR032374.fastq.gz | Illumina reads, 20K generation mixed population
 SRR032376.fastq.gz | Illumina reads, 40K generation mixed population
 NC_012967.1.fasta.gz | E. coli B str. REL606 genome
+
+
 
 The read files were downloaded from the [ENA SRA study](http://www.ebi.ac.uk/ena/data/view/SRP001569).
 So that you can treat all the data as single-ended for simplicity, we concatenated two separate FASTQ (paired-end) files for sample SRR030252 using this command
