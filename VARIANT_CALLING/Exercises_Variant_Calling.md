@@ -17,6 +17,7 @@ The approaches presented here work for Illumina or Ion Torrent data.
 
 ```
 wget https://www.dropbox.com/s/9p8zcg1add22q0u/DATA_NGS2_SNP.zip
+unzip DATA_NGS2_SNP.zip
 ```
 
 
@@ -144,6 +145,7 @@ An alternative summary with more information using bcftools:
 ```
 ~/software/SAMTOOLS/bcftools-1.3/bcftools stats -F EcoliDH10B.fa -s - Ecoli_DH10B-mdup.vcf.gz > Ecoli_DH10B-mdup.vcf.gz.stats
 sudo apt-get install python-matplotlib
+sudo apt-get install texlive-latex-base
 ~/software/SAMTOOLS/bcftools-1.3/plot-vcfstats -p bcftools_plots/ Ecoli_DH10B-mdup.vcf.gz.stats
 ```
 
@@ -187,7 +189,7 @@ Picard, samtools and bamtools are the most widely used tools for BAM file prepro
 Depending on the SNP Caller we have to perform all or just a subset of preprocessing steps. Above we have just done steps 1 + 2 before having used freebayes. Luckily, freebayes does the indel realignment step internally and does not require base recalibration. We just have to do steps 1 + 2.
 
 
-In constrast, for GATK UnifiedGenotyper we have to use all 4 BAM preprocessing steps. Let's look at the GATK workflow.
+In contrast, for GATK we have to use all 4 BAM preprocessing steps. Let's look at the GATK workflow.
 
 
 ### GATK
