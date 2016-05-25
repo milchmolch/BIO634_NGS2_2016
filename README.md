@@ -23,7 +23,7 @@ heidi.lischer@ieu.uzh.ch
 9.30 - 9.40 | **Welcome & Introduction** | SW&HTL
 9.40 - 12.30 | **Variant Calling 2** <br /> [Presentation](VARIANT_CALLING/Variant_Calling2.pdf)  \| [Hands-on](VARIANT_CALLING/Exercises_Variant_Calling.md) | SW
  | |
-13.30 - 14.30 | *Talk:* Dr. Christine Grossen (UZH): RAD-seq [pdf](TALKS/) |
+13.30 - 14.30 | *Talk:* Dr. Christine Grossen (UZH): RAD-seq [pdf](TALKS/RADseq_Grossen.pdf) |
 14.45 - 17.00 | **RNA-seq** <br /> [Presentation](RNAseq/RNAseq.pdf) \| [Hands-on](RNAseq/Exercises_RNAseq.pdf) | HTL
 17.00 - 17.30 | **Making sense of gene lists** <br /> [Presentation](GENE_LISTS/MakingSenseOfGeneLists.pdf)  \| [Hands-on](GENE_LISTS/Exercises_MakingSenseOfGeneLists.md) | SW
 
@@ -46,7 +46,8 @@ heidi.lischer@ieu.uzh.ch
 - Basic command line 
 - Basic knowledge about NGS data structure: reads, alignments (BAM), quality scores
 
-or attendance of `Next-Generation Sequencing 1 – Introductory Course: Assembly, Mapping, and Variant Calling
+or attendance of 'BIO609 Introduction to Linux and Bash Scripting' and  
+`BIO610 Next-Generation Sequencing 1 – Introductory Course: Assembly, Mapping, and Variant Calling
 
 
 ## Directory structure
