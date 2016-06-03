@@ -216,8 +216,7 @@ Then move the file to the ~/software/GATK directory and decompress it:
 ```
 cd ~/software/GATK
 mv ~/Download/GenomeAnalysisTK-3.5.tar.bz2 .
-bunzip2 GenomeAnalysisTK-3.5.tar.bz2
-tar xf GenomeAnalysisTK-3.5.tar
+tar xf GenomeAnalysisTK-3.5.tar.bz2
 ```
 
 and you're done with the GATK installation.
