@@ -15,7 +15,7 @@ heidi.lischer@ieu.uzh.ch
 
 ## Table of Content
 
-###Day 1
+### Day 1
 
 
 &nbsp;   | &nbsp; | &nbsp;
@@ -28,14 +28,14 @@ heidi.lischer@ieu.uzh.ch
 17.00 - 17.30 | **Making sense of gene lists** <br /> [Presentation](GENE_LISTS/MakingSenseOfGeneLists.pdf)  \| [Hands-on](GENE_LISTS/Exercises_MakingSenseOfGeneLists.md) | SW
 
 
-###Day 2
+### Day 2
 
 &nbsp;   | &nbsp; | &nbsp;
 -------- | --- | --- 
-9.30 - 12.30 | **Phylogenomics** | 
-             | Phylogenomic algorithms, construction, Heterozygote sampling <br /> [Presentation](PHYLOGENOMICS/Phylogenomics_HTL.pdf) \| [Hands-on](PHYLOGENOMICS/Exercises_Phylogenomics.pdf) | HTL
-             | Tree manipulation, summarizing and potential pitfalls <br /> [Presentation](PHYLOGENOMICS/Phylogenomics_SW.pdf) | SW
- | |
+9.30 - 12.30 | **Phylogenomics** |
+&nbsp; | Phylogenomic algorithms, construction, Heterozygote sampling <br /> [Presentation](PHYLOGENOMICS/Phylogenomics_HTL.pdf) \| [Hands-on](PHYLOGENOMICS/Exercises_Phylogenomics.pdf) | HTL
+&nbsp; | Tree manipulation, summarizing and potential pitfalls <br /> [Presentation](PHYLOGENOMICS/Phylogenomics_SW.pdf) | SW
+&nbsp; | &nbsp; | &nbsp; 
 13.30 - 14.30 | *Talk:* Dr. Jean-Claude Walser (ETH): RNA-seq in ecology and evolutionary biology [pdf](TALKS/RNAseq_Walser.pdf) | 
 14.45 - 16.00 |	*Talk:* Dr. Martin Fischer (ETH): Detection of signatures of selection [pdf](TALKS/NGS_Selection_Fischer.pdf) | 
 16.00 - 17.30 | Exercises | SW&HTL 
